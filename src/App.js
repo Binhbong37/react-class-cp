@@ -1,14 +1,21 @@
 import './App.css';
 import React, { Component } from 'react';
-import FuncComponet from './Components/FuncComponet';
+import { Navbar, NavbarBrand } from 'reactstrap';
+
+import Menu from './Components/MenuComponent';
 
 class App extends Component {
     render() {
         return (
-            <div>
-                <h1>Hello world</h1>
-                <h2>another pj</h2>
-                <FuncComponet />
+            <div className="App">
+                <Navbar dark color="primary">
+                    <div className="container">
+                        <NavbarBrand href="/">
+                            Ristorante Con Fusion
+                        </NavbarBrand>
+                    </div>
+                </Navbar>
+                <Menu />
             </div>
         );
     }
