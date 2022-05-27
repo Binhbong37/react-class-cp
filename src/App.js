@@ -7,6 +7,7 @@ class App extends Component {
         return (
             <div>
                 <h1>Hello world</h1>
+                <h2>another pj</h2>
                 <FuncComponet />
             </div>
         );
