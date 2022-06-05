@@ -5,7 +5,6 @@ class DishDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        console.log(this.props);
     }
 
     renderDish(dish) {
@@ -15,18 +14,18 @@ class DishDetail extends Component {
                     <Card>
                         <CardImg
                             width="100%"
-                            src={this.props.dish.image}
-                            alt={this.props.dish.name}
+                            src={dish.image}
+                            alt={dish.name}
                         />
                         <CardBody>
-                            <CardTitle>{this.props.dish.name}</CardTitle>
-                            <CardText>{this.props.dish.description}</CardText>
+                            <CardTitle>{dish.name}</CardTitle>
+                            <CardText>{dish.description}</CardText>
                         </CardBody>
                     </Card>
                 </div>
             );
         } else {
-            <div>No dish here!!</div>;
+            return <div>No dish here!!</div>;
         }
     }
 
@@ -37,7 +36,16 @@ class DishDetail extends Component {
                     <li key={comment.id}>
                         <p>{comment.comment}</p>
                         <p>
-                            {comment.author}, {comment.date}
+                            -- {comment.author},{' '}
+                            {new Date(comment.date).toLocaleDateString(
+                                'en-US',
+                                {
+                                    weekday: 'long',
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                }
+                            )}
                         </p>
                     </li>
                 );
@@ -54,7 +62,7 @@ class DishDetail extends Component {
     }
 
     render() {
-        if (this.props.dish) {
+        if (this.props.dish !== undefined) {
             return (
                 <div className="row">
                     {this.renderDish(this.props.dish)}
