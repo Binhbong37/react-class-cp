@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { DISHES, COMMENTS, PROMOTIONS, LEADERS } from '../shared/dishes';
 
 import Menu from './MenuComponent';
+import DishDetail from './DishdetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
@@ -40,30 +41,42 @@ class Main extends Component {
                 />
             );
         };
+
+        const DishWithId = ({ match }) => {
+            return (
+                <DishDetail
+                    dish={
+                        this.state.dishes.filter(
+                            (dish) => dish.id === parseInt(match.params.id)
+                        )[0]
+                    }
+                    comments={this.state.comments.filter(
+                        (comment) =>
+                            comment.dishId === parseInt(match.params.id)
+                    )}
+                />
+            );
+        };
+
         return (
             <>
                 <Header />
-                <div className="container">
-                    <Switch>
-                        <Route path="/home" component={HomePage} />
-                        <Route
-                            exact
-                            path="/menu"
-                            component={() => (
-                                <Menu dishes={this.state.dishes} />
-                            )}
-                        />
-                        <Route exact path="/contactus" component={Contact} />
-                        <Route
-                            exact
-                            path="/aboutus"
-                            component={() => (
-                                <About leaders={this.state.leaders} />
-                            )}
-                        />
-                        <Redirect to="/home" />
-                    </Switch>
-                </div>
+                <Switch>
+                    <Route path="/home" component={HomePage} />
+                    <Route
+                        exact
+                        path="/menu"
+                        component={() => <Menu dishes={this.state.dishes} />}
+                    />
+                    <Route exact path="/menu/:id" component={DishWithId} />
+                    <Route exact path="/contactus" component={Contact} />
+                    <Route
+                        exact
+                        path="/aboutus"
+                        component={() => <About leaders={this.state.leaders} />}
+                    />
+                    <Redirect to="/home" />
+                </Switch>
                 <Footer />
             </>
         );
