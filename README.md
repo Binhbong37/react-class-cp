@@ -11,3 +11,8 @@
 -   CSR: Lần đầu tiên sẽ load hết luôn, lưu trữ ở trong RAM, sau đó khi sử dụng sẽ chỉ lấy ra phần cần render lại, tăng trải nghiệm của người dùng
 
 *   vẫn có giao tiếp với server nhưng chủ yếu là lấy dữ liệu, hoặc push dữ liệu lên
+
+-   PARAMS ROUTER:
+
+*   Muốn định nghĩa 1 component trong class fc và dùng lại thì phải định nghĩa theo kiểu arrow fc ở bên trong render(){}
+    const NameComp = () => {}
