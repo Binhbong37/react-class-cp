@@ -16,3 +16,7 @@
 
 *   Muốn định nghĩa 1 component trong class fc và dùng lại thì phải định nghĩa theo kiểu arrow fc ở bên trong render(){}
     const NameComp = () => {}
+
+-   Dùng uncotronler form
+
+*   Dữ liệu được truy xuất từ DOM thông qua innerRef, không cần dùng state để set trạng thái ban đầu
