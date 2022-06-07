@@ -32,3 +32,6 @@
 -   Sử dụng lại dùng this.props... để get dữ liệu
 
 -   Khi truyền dữ liệu về redux cần phải chú ý thứ tự truyền, cái nào ghi trước ở phía dispatch thì cần phải truyền đúng thứ tự như vậy
+
+-   Sử dụng redux-thunk, logger: redux và react chạy song song,
+-   sau khi render lần đầu, dùng didMount để gọi lại fetch dữ liệu, khi đó logic chạy ( lưu ý, dishpatch thì vẫn chạy từ trên xuống)
