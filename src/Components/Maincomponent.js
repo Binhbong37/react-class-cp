@@ -10,7 +10,7 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 
-import { addComment } from '../redux/actionCreator';
+import { addComment, fetchDishes } from '../redux/actionCreator';
 
 class Main extends Component {
     constructor(props) {
@@ -19,11 +19,21 @@ class Main extends Component {
         this.props = {};
     }
 
+    componentDidMount() {
+        this.props.fetchDishes();
+    }
+
     render() {
         const HomePage = () => {
             return (
                 <Home
-                    dish={this.props.dishes.filter((dish) => dish.featured)[0]}
+                    dish={
+                        this.props.dishes.dishes.filter(
+                            (dish) => dish.featured
+                        )[0]
+                    }
+                    dishesLoading={this.props.dishes.isLoading}
+                    dishesErrMess={this.props.dishes.errMess}
                     promotion={
                         this.props.promotions.filter(
                             (promo) => promo.featured
@@ -42,10 +52,12 @@ class Main extends Component {
             return (
                 <DishDetail
                     dish={
-                        this.props.dishes.filter(
+                        this.props.dishes.dishes.filter(
                             (dish) => dish.id === parseInt(match.params.id)
                         )[0]
                     }
+                    isLoading={this.props.dishes.isLoading}
+                    errMess={this.props.dishes.errMess}
                     comments={this.props.comments.filter(
                         (comment) =>
                             comment.dishId === parseInt(match.params.id)
@@ -93,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addCommentt: (dishId, rating, author, comment) =>
             dispatch(addComment(dishId, rating, author, comment)),
+        fetchDishes: () => dispatch(fetchDishes()),
     };
 };
 
