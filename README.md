@@ -20,3 +20,13 @@
 -   Dùng uncotronler form
 
 *   Dữ liệu được truy xuất từ DOM thông qua innerRef, không cần dùng state để set trạng thái ban đầu
+
+### REDUX
+
+-   mapStateToProps() {}: được gọi khi state trong store thay đổi
+
+*   state của store redux còn props là của component view
+*   trả về một obj with full data
+
+-   mapDispatchToProps() {}: Những thay đổi mà từ comp view muốn gửi tới state của store
+-   Sử dụng lại dùng this.props... để get dữ liệu
