@@ -10,6 +10,8 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 
+import { addComment } from '../redux/actionCreator';
+
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -48,6 +50,7 @@ class Main extends Component {
                         (comment) =>
                             comment.dishId === parseInt(match.params.id)
                     )}
+                    addComment={this.props.addCommentt}
                 />
             );
         };
@@ -86,4 +89,11 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps)(Main));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addCommentt: (dishId, rating, author, comment) =>
+            dispatch(addComment(dishId, rating, author, comment)),
+    };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

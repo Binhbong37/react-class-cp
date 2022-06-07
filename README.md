@@ -30,3 +30,5 @@
 
 -   mapDispatchToProps() {}: Những thay đổi mà từ comp view muốn gửi tới state của store
 -   Sử dụng lại dùng this.props... để get dữ liệu
+
+-   Khi truyền dữ liệu về redux cần phải chú ý thứ tự truyền, cái nào ghi trước ở phía dispatch thì cần phải truyền đúng thứ tự như vậy
