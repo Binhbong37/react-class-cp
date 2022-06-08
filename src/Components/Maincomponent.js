@@ -11,7 +11,12 @@ import Contact from './ContactComponent';
 import About from './AboutComponent';
 import { actions } from 'react-redux-form';
 
-import { addComment, fetchDishes } from '../redux/actionCreator';
+import {
+    addComment,
+    fetchDishes,
+    fetchPromotions,
+    fetchComments,
+} from '../redux/actionCreator';
 
 class Main extends Component {
     constructor(props) {
@@ -22,6 +27,8 @@ class Main extends Component {
 
     componentDidMount() {
         this.props.fetchDishes();
+        this.props.fetchPromotions();
+        this.props.fetchComments();
     }
 
     render() {
@@ -36,10 +43,12 @@ class Main extends Component {
                     dishesLoading={this.props.dishes.isLoading}
                     dishesErrMess={this.props.dishes.errMess}
                     promotion={
-                        this.props.promotions.filter(
+                        this.props.promotions.promos.filter(
                             (promo) => promo.featured
                         )[0]
                     }
+                    promoLoading={this.props.promotions.isLoading}
+                    promoErrMess={this.props.promotions.errMess}
                     leader={
                         this.props.leaders.filter(
                             (leader) => leader.featured
@@ -59,10 +68,11 @@ class Main extends Component {
                     }
                     isLoading={this.props.dishes.isLoading}
                     errMess={this.props.dishes.errMess}
-                    comments={this.props.comments.filter(
+                    comments={this.props.comments.comments.filter(
                         (comment) =>
                             comment.dishId === parseInt(match.params.id)
                     )}
+                    commentsErrMess={this.props.comments.errMess}
                     addComment={this.props.addCommentt}
                 />
             );
@@ -113,6 +123,8 @@ const mapDispatchToProps = (dispatch) => {
         addCommentt: (dishId, rating, author, comment) =>
             dispatch(addComment(dishId, rating, author, comment)),
         fetchDishes: () => dispatch(fetchDishes()),
+        fetchPromotions: () => dispatch(fetchPromotions()),
+        fetchComments: () => dispatch(fetchComments()),
         resetFeedbackForm: () => dispatch(actions.reset('feedback')),
     };
 };

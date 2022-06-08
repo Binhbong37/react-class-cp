@@ -11,12 +11,17 @@ import {
 } from 'reactstrap';
 
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function MenuListItem({ dish }) {
     return (
         <Card>
             <Link to={`/menu/${dish.id}`}>
-                <CardImg width="100%" src={dish.image} alt={dish.name} />
+                <CardImg
+                    width="100%"
+                    src={baseUrl + dish.image}
+                    alt={dish.name}
+                />
                 <CardImgOverlay>
                     <CardTitle>{dish.name}</CardTitle>
                 </CardImgOverlay>

@@ -35,3 +35,15 @@
 
 -   Sử dụng redux-thunk, logger: redux và react chạy song song,
 -   sau khi render lần đầu, dùng didMount để gọi lại fetch dữ liệu, khi đó logic chạy ( lưu ý, dishpatch thì vẫn chạy từ trên xuống)
+
+### Tạo 1 json-sever
+
+-   cùng cấp
+    npm install json-server -g
+-   thêm cho nó 1 file db.json, 1 thư mục public để chứa hình ảnh, css ...
+-   json-server --watch db.json -p 3001 -d 2000
+
+*   -d 2000: thể hiện độ trễ là sẽ phải mất 2s để take data
+*   -p 3001 là cổng chạy của cái này
+
+-   Cần để đúng foler rồi chạy các lệnh trên
