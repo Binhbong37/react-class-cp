@@ -18,9 +18,26 @@ export const addComment = (dishId, rating, author, comment) => {
 
 export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')
+        .then(
+            (response) => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    let error = new Error(
+                        'Err: ' + response.status + ': ' + response.statusText
+                    );
+                    error.response = response;
+                    throw error;
+                }
+            },
+            (errors) => {
+                let errMess = new Error(errors.message);
+                throw errMess;
+            }
+        )
         .then((response) => response.json())
         .then((comments) => dispatch(addComments(comments)))
-        .catch((err) => console.log('ERR', err));
+        .catch((err) => dispatch(commentsFailed(err.message)));
 };
 
 export const commentsFailed = (errmess) => ({
@@ -40,9 +57,26 @@ export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
 
     return fetch(baseUrl + 'dishes')
+        .then(
+            (response) => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    let error = new Error(
+                        'Err: ' + response.status + ': ' + response.statusText
+                    );
+                    error.response = response;
+                    throw error;
+                }
+            },
+            (errors) => {
+                let errMess = new Error('Interval Serve' + errors.message);
+                throw errMess;
+            }
+        )
         .then((response) => response.json())
         .then((dishes) => dispatch(addDishes(dishes)))
-        .catch((err) => console.log('ERR', err));
+        .catch((err) => dispatch(dishesFailed(err.message)));
 };
 
 export const dishesLoading = () => ({
@@ -64,9 +98,26 @@ export const fetchPromotions = () => (dispatch) => {
     dispatch(promoLoading(true));
 
     return fetch(baseUrl + 'promotions')
+        .then(
+            (response) => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    let error = new Error(
+                        'Err: ' + response.status + ': ' + response.statusText
+                    );
+                    error.response = response;
+                    throw error;
+                }
+            },
+            (errors) => {
+                let errMess = new Error(errors.message);
+                throw errMess;
+            }
+        )
         .then((response) => response.json())
         .then((promo) => dispatch(addPromo(promo)))
-        .catch((err) => console.log('ERR', err));
+        .catch((err) => dispatch(promoFailed(err.message)));
 };
 
 export const promoLoading = () => ({

@@ -47,3 +47,10 @@
 *   -p 3001 là cổng chạy của cái này
 
 -   Cần để đúng foler rồi chạy các lệnh trên
+
+### catching lỗi
+
+-   Như đang xử lý ở phần dishes: Sẽ có 2 TH:
+
+*   1. Lỗi được máy chủ trả về
+*   2. Lỗi k biết từ đâu tới (chưa kết nối server ...)
