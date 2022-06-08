@@ -12,7 +12,7 @@ import About from './AboutComponent';
 import { actions } from 'react-redux-form';
 
 import {
-    addComment,
+    postComment,
     fetchDishes,
     fetchPromotions,
     fetchComments,
@@ -121,7 +121,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addCommentt: (dishId, rating, author, comment) =>
-            dispatch(addComment(dishId, rating, author, comment)),
+            dispatch(postComment(dishId, rating, author, comment)),
         fetchDishes: () => dispatch(fetchDishes()),
         fetchPromotions: () => dispatch(fetchPromotions()),
         fetchComments: () => dispatch(fetchComments()),

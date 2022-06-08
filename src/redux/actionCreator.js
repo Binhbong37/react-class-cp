@@ -4,16 +4,52 @@ import { baseUrl } from '../shared/baseUrl';
 
 //  comments
 
-export const addComment = (dishId, rating, author, comment) => {
+export const addComment = (comment) => {
     return {
         type: ActionTypes.ADD_COMMENT,
-        payload: {
-            dishId,
-            rating,
-            author,
-            comment,
-        },
+        payload: comment,
     };
+};
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+    const newComment = {
+        dishId,
+        rating,
+        author,
+        comment,
+    };
+    newComment.date = new Date().toISOString();
+    return fetch(baseUrl + 'comments', {
+        method: 'POST',
+        body: JSON.stringify(newComment),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
+    })
+        .then(
+            (response) => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    let error = new Error(
+                        'Err: ' + response.status + ': ' + response.statusText
+                    );
+                    error.response = response;
+                    throw error;
+                }
+            },
+            (errors) => {
+                let errMess = new Error(errors.message);
+                throw errMess;
+            }
+        )
+        .then((response) => response.json())
+        .then((comment) => dispatch(addComment(comment)))
+        .catch((err) => {
+            alert('Could not be Post comment: ' + err.message);
+            console.log('err Post', err.message);
+        });
 };
 
 export const fetchComments = () => (dispatch) => {
